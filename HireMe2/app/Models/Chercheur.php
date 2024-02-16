@@ -14,30 +14,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Chercheur extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id_user',
+        'nom',
+        'prenom',
+        'telephone',
+        'adresse',
+        'poste',
+        'photo',
+        'about',
+    ];
     public function emploi()
     {
         return $this->belongsToMany(Emploi::class);
     }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'id_user');
     }
+  
 
-    public function langue()
-    {
-        return $this->hasMany(Langue::class);
-    }
-    public function experience()
-    {
-        return $this->hasMany(Experience::class);
-    }
-
-    public function education()
-    {
-        return $this->hasMany(Education::class);
-    }
-    public function competence()
-    {
-        return $this->hasMany(Competence::class);
-    }
 }

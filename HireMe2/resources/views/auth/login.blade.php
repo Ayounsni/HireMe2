@@ -1,6 +1,11 @@
+<x-boot>
+@include('profile.partials.nav') 
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="d-flex justify-content-center ">
+        <img src="{{ asset('image/hiire-removebg.png') }}" class="h-10 mb-4" alt=" Logo">
+    </div>
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -45,3 +50,4 @@
         </div>
     </form>
 </x-guest-layout>
+</x-boot>

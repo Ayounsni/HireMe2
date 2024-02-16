@@ -1,101 +1,76 @@
 <x-boot>
+    @include('profile.partials.nav') 
         <div class="col-lg-7 mx-auto mt-1">
-          <a href="/" class="btn bg-primary text-white"><i class="bi bi-backspace"></i> Retour</a>
-          <div class="card mt-2 mx-auto p-3 bg-light mb-4">
-              <div class="card-body bg-light">
+          <div class="card  mx-auto bg-light mb-4 shadow-md rounded-md mt-4">
+              <div class="card-body bg-light ">
                   
               <div class = "container">
-                  <form method="POST" action="">
+                  <form method="POST" action="{{route('registerCan')}}" enctype="multipart/form-data">
                       @csrf
                       <div class="controls">
                           <div class="row">
-                              <h1 class="mb-2 fs-4 lead text-secondary fw-medium">Contact :</h1>
+                              <h1 class="mb-2 fs-3 text-center lead  fw-light text-secondary fw-medium">CANDIDAT</h1>
                               <div class="col-md-6">
-                                  <div class="form-group">
-                                      <label for="form_name">Prénom<span class="text-danger">*</span></label>
-                                      <input id="form_name" type="text" name="prenom" class="form-control" placeholder="Entrer prénom" data-error="Firstname is required.">
-                                      @error('prenom')
-                                      <span class="text-danger">{{$message}}</span>      
-                                      @enderror                                
-                                  </div>
+                                <div class="mt-4">
+                                    <x-input-label for="Nom" :value="__('Nom')" />
+                                    <x-text-input  class="block mt-1 w-full ayoub" type="text" name="nom" :value="old('nom')"  />
+                                    <x-input-error :messages="$errors->get('nom')" class="mt-2" />
+                                </div>
                               </div>
                               <div class="col-md-6">
-                                  <div class="form-group">
-                                      <label for="form_name">Nom<span class="text-danger">*</span></label>
-                                      <input id="form_lastname" type="text" name="nom" class="form-control" placeholder="Entrer nom"  data-error="Lastname is required.">
-                                      @error('nom')
-                                      <span class="text-danger">{{$message}}</span>      
-                                      @enderror
-                                  </div>
+                                <div class="mt-4">
+                                    <x-input-label for="prenom" :value="__('Prenom')" />
+                                    <x-text-input  class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom')"  />
+                                    <x-input-error :messages="$errors->get('prenom')" class="mt-2" />
+                                </div>
                               </div>
                           </div>
                           <div class="row">
                               <div class="col-md-6">
-                                  <div class="form-group">
-                                      <label for="form_email">Email <span class="text-danger">*</span></label>
-                                      <input id="form_email" type="text" name="email" class="form-control" placeholder="Entrer Email"  data-error="Valid email is required.">
-                                      @error('email')
-                                      <span class="text-danger">{{$message}}</span>      
-                                      @enderror
-                                  </div>
+                                <div class="mt-4">
+                                    <x-input-label for="tel" :value="__('Tel')" />
+                                    <x-text-input  class="block mt-1 w-full" type="tel" name="tel" :value="old('tel')"  />
+                                    <x-input-error :messages="$errors->get('tel')" class="mt-2" />
+                                </div>
                               </div>
                               <div class="col-md-6">
-                                  <div class="form-group">
-                                      <label for="form_email">Tel <span class="text-danger">*</span></label>
-                                      <input id="form_email" type="tel" name="phone" class="form-control" placeholder="Entrer telephone" data-error="Valid email is required.">
-                                      @error('phone')
-                                      <span class="text-danger">{{$message}}</span>      
-                                      @enderror
-                                  </div>
+                                <div class="mt-4">
+                                    <x-input-label for="adresse" :value="__('Adresse')" />
+                                    <x-text-input id="email" class="block mt-1 w-full" type="text" name="adresse" :value="old('adresse')"  />
+                                    <x-input-error :messages="$errors->get('adresse')" class="mt-2" />
+                                </div>
                               </div>
                           </div>
                           <div class="row">
-                              <h1 class="my-2 fs-4 lead text-secondary fw-medium">Service :</h1>
+
                               <div class="col-md-12">
+                                <div class="mt-4">
+                                    <x-input-label for="post" :value="__('Poste Actuel')" />
+                                    <x-text-input id="email" class="block mt-1 w-full" type="text" name="post" :value="old('post')"  />
+                                    <x-input-error :messages="$errors->get('post')" class="mt-2" />
+                                </div>
+                              </div>
+                              <div class="col-md-12">
+                                <div class="mt-4">
+                                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Photo de Profile</label>
+                                    <input name="image" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer  dark:text-gray-400 focus:outline-none dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-100 shadow-sm" id="file_input"  type="file">
+                              </div>
+                            </div>
+                              <div class="col-md-12">
+                                <div class="mt-4">
                                   <div class="form-group">
-                                      <label for="form_email">Titre <span class="text-danger">*</span></label>
-                                      <input  type="text" name="title" class="form-control" placeholder="Entrer titre" >
-                                      @error('title')
+                                      <label for="form_message" class="block font-medium text-sm  mb-2 text-gray-700 dark:text-gray-300">À propos</label>
+                                      <textarea  name="about"  class="form-control border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" placeholder="Entrer la description ici." rows="4" ></textarea>
+                                      @error('about')
                                       <span class="text-danger">{{$message}}</span>      
                                       @enderror
                                   </div>
+                                </div>
                               </div>
-                              <div class="col-md-12">
-                                  <div class="form-group">
-                                      <label for="form_need">Catégorie <span class="text-danger">*</span></label>
-                                      <select id="form_need" name="categorie" class="form-control"  data-error="Please specify your need.">
-                                          <option value="" selected disabled>--Choisir Catégorie--</option>
-                                          
-                                          <option value=""></option>
-                                          
-                                          
-                                      </select>
-                                      @error('categorie')
-                                      <span class="text-danger">{{$message}}</span>      
-                                      @enderror
-                                  </div>
-                              </div>
-                              <div class="col-md-12">
-                                  <div class="form-group">
-                                      <label for="form_message">Description<span class="text-danger">*</span></label>
-                                      <textarea id="form_message" name="description" class="form-control" placeholder="Entrer la description ici." rows="4" ></textarea>
-                                      @error('description')
-                                      <span class="text-danger">{{$message}}</span>      
-                                      @enderror
-                                  </div>
-                              </div>
-                              <div class="col-md-12">
-                                  <div class="form-group">
-                                      <label for="form_email">Prix en DH <span class="text-danger">*</span></label>
-                                      <input  type="text" name="prix" class="form-control" placeholder="Entrer le prix" >
-                                      @error('prix')
-                                      <span class="text-danger">{{$message}}</span>      
-                                      @enderror
-                                  </div>
-                              </div>
+
                               <div class="col-md-12">
                                   <div class="d-flex justify-content-end">
-                                      <input type="submit" class="btn bg-primary my-2 text-white" value="Créer service">
+                                      <input type="submit" class="btn bg-dark my-2 text-white" value="Inscription">
                                   </div>
                               </div>
                           </div>
@@ -105,6 +80,7 @@
               </div>
       </div>
       </div>
+        
     
  
 </x-boot>

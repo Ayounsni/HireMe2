@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use App\Models\Chercheur;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,9 +10,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class emploi extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+            'id_entreprise',
+            'titre',
+            'description',
+            'competence',
+            'type_contrat',
+            'emplacement',
+    ];
     
-    public function chercheur()
+    public function user()
     {
-        return $this->belongsToMany(Chercheur::class);
+        return $this->belongsTo(User::class,'id_entreprise');
     }
 }

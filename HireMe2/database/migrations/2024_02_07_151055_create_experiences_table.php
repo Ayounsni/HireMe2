@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('poste');
             $table->string('entreprise');
-            $table->foreignId('id_cherch')->constrained('chercheurs')->onDelete('cascade');
+            $table->foreignId('id_cherch')->constrained('users')->onDelete('cascade');
             $table->date('date_debut');
             $table->date('date_fin');
             $table->timestamps();
